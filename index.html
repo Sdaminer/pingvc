@@ -1,7 +1,19 @@
 <script>
-fetch("https://ntfy.sh/samvcjoins", {
-  method: "POST",
-  body: "Someone joined your voice chat"
-});
-location.href = "https://vdo.ninja/?room=izzyandsamvoicechat";
+function join() {
+  const name = document.getElementById("nameInput").value.trim();
+  if (!name) return alert("Please enter a name");
+
+  // Send notification to ntfy
+  fetch("https://ntfy.sh/samvcjoins", {
+    method: "POST",
+    body: name + " joined the voice chat"
+  });
+
+  // Redirect to VDO.Ninja with the name applied
+  const url =
+    "https://vdo.ninja/?room=izzyandsamvoicechat&label=" +
+    encodeURIComponent(name);
+
+  window.location.href = url;
+}
 </script>
