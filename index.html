@@ -1,19 +1,67 @@
-<script>
-function join() {
-  const name = document.getElementById("nameInput").value.trim();
-  if (!name) return alert("Please enter a name");
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Join Voice Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      width: 250px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
 
-  // Send notification to ntfy
-  fetch("https://ntfy.sh/samvcjoins", {
-    method: "POST",
-    body: name + " joined the voice chat"
-  });
+  <h2>Enter your name</h2>
+  <input id="nameInput" placeholder="Your name">
+  <button onclick="join()">Join Voice Chat</button>
 
-  // Redirect to VDO.Ninja with the name applied
-  const url =
-    "https://vdo.ninja/?room=izzyandsamvoicechat&label=" +
-    encodeURIComponent(name);
+  <script>
+    function join() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) return alert("Please enter a name");
 
-  window.location.href = url;
-}
-</script>
+      // Send notification to ntfy
+      fetch("https://ntfy.sh/YOUR_TOPIC", {
+        method: "POST",
+        body: name + " joined the voice chat"
+      });
+
+      // Redirect to VDO.Ninja with the name applied
+      const url =
+        "https://vdo.ninja/?room=izzyandsamvoicechat&label=" +
+        encodeURIComponent(name);
+
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>
